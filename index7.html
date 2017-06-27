@@ -2,15 +2,25 @@
 <html>
 <head>
 	<title>test</title>
+	<style type="text/css">
+		.completado{
+			text-decoration: line-through;
+		}
+	</style>
 </head>
 <body>
 <h1>Tareas</h1>
 <main id="main">
+	<b v-text="tareasCompletadas"></b>
 	<ul>
-		<li @click="completar(tarea)" v-for="tarea in tareas">
+		<li
+		:class="{completado:tarea.completado}" 
+		@click="completar(tarea)" 
+		v-for="tarea in tareas">
 			{{tarea.titulo}}
 		</li>
-	</ul>
+	</ul><br>
+	<pre>{{$data}}</pre>
 </main>
 
 <script type="text/javascript" src="https://unpkg.com/vue@2.3.4"></script>
@@ -18,6 +28,7 @@
 	new Vue({
 		el:"#main",
 		data:{
+			completadas:"",
 			tareas:[
 				{titulo:"Comprar cosas", completado:false},
 				{titulo:"Hacer lo de boumatic", completado:true}
@@ -25,7 +36,12 @@
 		},
 		methods:{
 			completar(tarea){
-				console.log(tarea)
+				tarea.completado=!tarea.completado
+			}
+		},
+		computed:{
+			tareasCompletadas(){
+				return `Completadas: ${this.tareas.filter(a=>a.completado).length}`
 			}
 		}
 	})

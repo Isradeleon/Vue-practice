@@ -1,0 +1,25 @@
+{
+  "name": "vue-js",
+  "version": "1.0.0",
+  "description": "vue practices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Isradeleon/Vue-practice.git"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "isradeleon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Isradeleon/Vue-practice/issues"
+  },
+  "homepage": "https://github.com/Isradeleon/Vue-practice#readme",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TRANSITIONS</title>
+	<link rel="stylesheet" type="text/css" href="./animate.min.css">
+	<style type="text/css">
+	/*transition*/
+	.aparecer-enter{
+		opacity: 0;
+	}
+	.aparecer-enter-active{
+		transition: opacity 1s;
+	}
+	.aparecer-leave-to{
+		opacity: 0;
+	}
+	.aparecer-leave-active{
+		transition: opacity 1s;
+	}
+
+	/*animation*/
+	.botar-enter-active {
+	  animation: bounce-in .5s;
+	}
+	.botar-leave-active {
+	  animation: bounce-in .5s reverse;
+	}
+	@keyframes bounce-in {
+	  0% {
+	    transform: scale(0);
+	  }
+	  50% {
+	    transform: scale(1.5);
+	  }
+	  100% {
+	    transform: scale(1);
+	  }
+	}
+	</style>
+</head>
+<body>
+<h1>Nueva practica</h1>
+<main id="main">
+	<button @click="mostrar=!mostrar">Mostrar mensaje</button>
+	<!-- transition -->
+	<transition name="aparecer">
+		<h1 v-if="mostrar" v-text="mensaje.transition"></h1>
+	</transition>
+
+	<!-- animation -->
+	<transition name="botar">
+		<h1 v-if="mostrar" v-text="mensaje.animation"></h1>
+	</transition>
+
+	<!-- custom -->
+	<transition 
+	name="animated-css"
+	enter-active-class="animated slideInLeft"
+	leave-active-class="animated slideOutRight">
+		<h1 v-if="mostrar" v-text="mensaje.custom"></h1>
+	</transition>
+
+	<!-- appear -->
+	<transition
+	appear
+	appear-active-class="animated rollIn"
+	enter-active-class="animated slideInLeft"
+	leave-active-class="animated slideOutRight">
+		<h1 v-if="mostrar" v-text="mensaje.appear"></h1>
+	</transition>
+
+	<!-- netween elements -->
+	<transition
+	mode="out-in"
+	name="animated-css-2"
+	enter-active-class="animated fadeIn"
+	leave-active-class="animated fadeOut">
+		<h1 key="h1-1" v-if="mostrar">Si mensaje</h1>
+		<h1 key="h1-2" v-else>No mensaje</h1>
+	</transition>
+
+	<pre>{{$data}}</pre>
+</main>
+
+<script type="text/javascript" src="https://unpkg.com/vue@2.3.4"></script>
+<script type="text/javascript">
+	new Vue({
+		el:"#main",
+		data:{
+			mostrar:true,
+			mensaje:{
+				transition:"Transition",
+				animation:"Animation",
+				custom:"Custom",
+				appear:"Appear with roll in"
+			}
+		}
+	})
+</script>
+</body>
+</html>
