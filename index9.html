@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AXIOS</title>
+	<link rel="stylesheet" type="text/css" href="./animate.min.css">
+</head>
+<body>
+<h1>Nueva practica</h1>
+<main id="main">
+	<div id="button_div">
+		<button id="askUsers" @click="pedirUsuarios">Usuarios</button>
+	</div>
+	<img v-for="usuario in usuarios" :src="usuario.picture.thumbnail">
+	<pre>{{$data}}</pre>
+</main>
+
+<script type="text/javascript" src="./vue.js"></script>
+<script type="text/javascript" src="./node_modules/axios/dist/axios.js"></script>
+
+<script type="text/javascript">
+	new Vue({
+		el:"#main",
+		mounted(){
+			console.log(this.usuarios)
+			this.pedirUsuarios()
+		},
+		data:{
+			usuarios:[]
+		},
+		methods:{
+			pedirUsuarios(){
+				console.log("CLIk!")
+				document.querySelector('#askUsers').style.display="none"
+				axios.get('https://randomuser.me/api/?results=500')
+				.then((response)=>{
+					this.usuarios=response.data.results
+					document.querySelector('#askUsers').style.display="inline"
+				})
+			}
+		}
+			
+	})
+</script>
+</body>
+</html>
