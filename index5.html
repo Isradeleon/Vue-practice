@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<main>
+		<h2>{{reversedMsg}}</h2>
+		<h2>{{msg}}</h2>
+		<ul>
+			<li v-for="tod in todoPriority">{{tod.thing}}</li>
+		</ul>
+		<hr>
+		<ul>
+			<li v-for="contact in contacts">{{contact}}</li>
+		</ul>
+		<br>
+		<form v-on:submit.prevent="add_contact">
+			<input type="text" v-model="contact_name">
+			<button type="submit">Add contact</button>
+		</form>
+		<br>
+		<button type="button" v-on:click="delete_last">Delete last</button>
+		<pre>{{ $data }}</pre>
+	</main>
+	<script type="text/javascript" src="https://unpkg.com/vue@2.3.4"></script>
+	<script type="text/javascript">
+		const vue=new Vue({
+			el:"main",//componente
+			data:{//modelo
+				msg:"Hola mundo! :D",
+				contact_name:null,
+				contacts:[
+					"Jazmin","Mauricio","Ramiro"
+				],
+				todo:[
+					{thing:"Eat",priority:true},
+					{thing:"Breath",priority:false},
+					{thing:"Code",priority:true}
+				]
+			},
+			methods:{//funciones
+				add_contact(){
+					this.contacts.unshift(this.contact_name)
+					this.contact_name=null
+				},
+				delete_last(){
+					this.contacts.shift()
+				}
+			},
+			computed:{//solo se evalúa cuando cambian las dependencias
+				reversedMsg(){
+					return this.msg.split('').reverse().join('')
+				},
+				todoPriority(){
+					return this.todo.filter(tod => tod.priority)
+				}
+			}
+		})
+	</script>
+</body>
+</html>

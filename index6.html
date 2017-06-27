@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<main>
+		<input placeholder="Seach" type="search" v-model="search">
+		<ul>
+			<li v-for="game in searchGames"><strong>Title:</strong> {{game.title}}</li>
+		</ul>
+		<hr>
+		<ul>
+			<li v-for="game in bestGames"><strong>Title:</strong> {{game.title}} ({{game.stars}} stars).</li>
+		</ul>
+		<input type="range" min="0" max="5" v-model="minimum">
+		<pre>{{ $data }}</pre>
+	</main>
+	<script type="text/javascript" src="https://unpkg.com/vue@2.3.4"></script>
+	<script type="text/javascript">
+		new Vue({
+			el:"main",//componente
+			data:{
+				search:'',
+				minimum:4,
+				games:[
+					{title:"The evil within",stars:3},
+					{title:"Assasin's creed",stars:4},
+					{title:"Outlast",stars:5},
+					{title:"Outlast 2",stars:2}
+				]
+			},
+			computed:{
+				bestGames(){
+					return this.games.filter(game => game.stars >= this.minimum)
+				},
+				searchGames(){
+					return this.games.filter(game => game.title.includes(this.search))
+				}
+			}
+		})
+	</script>
+</body>
+</html>
